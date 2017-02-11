@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  WKWebViewController.swift
 //  2ChBrowser
 //
 //  Created by Shigeo Sakamoto on 2017/02/11.
@@ -9,9 +9,10 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, WKUIDelegate {
+class WKWebViewController: UIViewController, WKUIDelegate {
 
     var webView: WKWebView!
+    var data:(name:String, url:String)?
 
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
@@ -19,19 +20,19 @@ class ViewController: UIViewController, WKUIDelegate {
         webView.uiDelegate = self
         view = webView
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let myURL = URL(string: "https://www.apple.com")
-        let myRequest = URLRequest(url: myURL!)
+        if let myURL = URL(string: (data?.url)!) {
+            let myRequest = URLRequest(url: myURL)
 
-        webView.load(myRequest)
+            webView.load(myRequest)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
-
 }
-
